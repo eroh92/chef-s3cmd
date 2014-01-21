@@ -33,7 +33,7 @@ end
 
 directory home_folder do
   owner node[:s3cmd][:user]
-  group node[:s3cmd][:user]
+  group node[:s3cmd][:group]
   mode "0755"
   action :create
 end
@@ -49,6 +49,6 @@ template "#{home_folder}/.s3cfg" do
     :encrypt =>  node['s3cmd']['encrypt']
   )
   owner node['s3cmd']['user']
-  group node['s3cmd']['user']
+  group node['s3cmd']['group']
   mode 0600
 end
