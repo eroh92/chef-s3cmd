@@ -31,6 +31,13 @@ else
   home_folder = node['etc']['passwd'][node['s3cmd']['user']]['dir']
 end
 
+directory home_folder do
+  owner node[:s3cmd][:user]
+  group node[:s3cmd][:user]
+  mode "0755"
+  action :create
+end
+
 template "#{home_folder}/.s3cfg" do
   source "s3cfg.erb"
   variables(
